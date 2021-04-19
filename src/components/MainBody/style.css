@@ -2,6 +2,7 @@
 .mainbody-container {
     margin-left: 200px;
     padding: 5px 10px; 
+    width: 100%;
 }
 
 header {
@@ -12,8 +13,24 @@ header {
     border-bottom: solid 2px #ccc;
 }
 
+.menu-icon {
+  display: none;
+}
+
 .book-grid {
     display: flex;
     flex-wrap: wrap; 
     justify-content: space-evenly;
+}
+
+.book-list {
+    padding: 2% 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 777px) {
+    .mainbody-container {
+        margin-left: 10px;
+    }
 }

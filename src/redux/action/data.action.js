@@ -1,5 +1,5 @@
 import { HOME_VOLUME_FAIL, HOME_VOLUME_REQUEST, HOME_VOLUME_SUCCESS } from "../actionType"
-import {request, getVolumes} from "../../api/api"
+import {getVolumes} from "../../api/api"
 
 export const getPopularVolumes = () => async dispatch => {
     try {

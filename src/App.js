@@ -10,6 +10,9 @@ import Login from "./components/Login/Login"
 
 function App() {
 
+  const[darkMode, setDarkMode] = useState(false);
+  const[gridView, setGridView] = useState(true);  
+
   const {accessToken, loading} = useSelector(state => state.auth);
   const history = useHistory();
 
@@ -24,9 +27,14 @@ function App() {
     <>
       <Switch>
         <Route exact path="/">
-          <div className="container">
-             <Navbar />
-             <MainBody />
+          <div className={darkMode ? "container dark-mode" : "container light-mode"}>
+             <Navbar 
+               darkMode={darkMode} 
+               setDarkMode={setDarkMode}
+               gridView={gridView}  
+               setGridView={setGridView}
+               />
+             <MainBody darkMode={darkMode} gridView={gridView}/> 
           </div>
         </Route>
         <Route exact path="/auth">
