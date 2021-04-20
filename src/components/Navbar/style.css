@@ -40,8 +40,52 @@
   cursor: pointer;
 }
 
+/* form style */
+
+.search-form {
+  display: none;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  z-index: 1100;
+  padding: 20px 20px;
+  border-radius: 20px;
+  background-color: #fffffff8;
+}
+
+.show {
+  display: block;
+}
+
+.search-form input {
+   background-color: transparent;
+   padding: 5px 10px;
+   border-radius: 4px;
+   border: #ccc 2px solid;
+}
+
+.search-form button {
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.dark-button {
+   background-color:#FD7272;
+   border: 2px solid #6e3a3a;
+}
+
+.light-button {
+   background-color:#3071c7;
+   border: 2px solid #1c5b79;
+}
+
 @media (max-width: 777px) {
     .navbar-container {
-     transform: translateX(-100%);
+     transform: translateX(-100%); 
+     
+    }
+
+    .open {
+      transform: translateX(0%);
     }
 }

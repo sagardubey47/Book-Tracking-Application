@@ -1,25 +1,15 @@
 import React from 'react'
 import "./style.css"
 import defaultImg from "../../image/defaultImg.jpg";
+import {useDispatch} from "react-redux"
+import { getModel } from '../../redux/action/modelData.action';
 
-function BookContainer({volume, darkMode, gridView}) { 
-        // could be accessed
-        // accessInfo,
-        // etag,
-        // id,
-        // saleInfo,
-        // searchInfo,
-        // {
-        //    categories,
-        //    language,
-        //    publishedDate,
-        //    title,
-        //    authors,
-        // }
-    // console.log(volume);
+function BookContainer({volume, darkMode, gridView, setModelId}) { 
 
-    const { volumeInfo, searchInfo } = volume;
+    const { volumeInfo, searchInfo, id} = volume;
+    const dispatch = useDispatch();
     
+    // to handle fallbacks
     const thumbnail = volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : defaultImg;
     const categories = volumeInfo.categories ? volumeInfo.categories : ["unknown"];
     const language = volumeInfo.language ? volumeInfo.language : "default:en";
@@ -27,25 +17,33 @@ function BookContainer({volume, darkMode, gridView}) {
     const title = volumeInfo.title ? volumeInfo.title : "unknown: mystry"
     const authors = volumeInfo.authors ? volumeInfo.authors : ["Mr anonymous"];
     const textSnippet = searchInfo ? searchInfo.textSnippet : ""
+
+    const handleClick = () => {
+         setModelId(id);
+         dispatch(getModel(id))
+    }
  
     return (
-        <div className={gridView ? "book-card": "book-card list"}
-             style={darkMode ? {backgroundColor: "#FD7272"} : {backgroundColor: "#3071c7"}}>
+        <div 
+             className={gridView ? "book-card": "book-card list"}
+             style={darkMode ? {backgroundColor: "#FD7272"} : {backgroundColor: "#3071c7"}}
+             onClick={handleClick}
+        >
             <img height="200" width="170" src={thumbnail} alt="thumbnail" />
             <div className="bottom">
                 {
-                  gridView ? 
+                  gridView ?  
                   (<>
                      <h4 className="limit-text limit-title">{title}</h4>
                      <p className="limit-text limit-author">{authors[0]}</p>   
                   </>) : 
                   (<>
-                     <h4 className="limit-text limit-title-list">{`Title: ${title}`}</h4>
-                     <p>{`Author: ${authors[0]}`}</p>
-                     <p>{`Published Date: ${publishedDate}`} </p>
-                     <p>{`Categories: ${categories}`} </p>
-                     <p>{`Language: ${language}`} </p>
-                     <p className="about">{`About: ${textSnippet}`}</p>
+                     <h4 className="limit-text limit-title-list"><span>Title:</span> {title}</h4>
+                     <p><span>Author: </span> {authors[0]}</p>
+                     <p><span>Published Date: </span> {publishedDate} </p>
+                     <p><span>Categories: </span> {categories} </p>
+                     <p><span>Language: </span> {language} </p>
+                     <p className="about"><span>About: </span> {textSnippet}</p>
                   </>) 
                }
             </div>

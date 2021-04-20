@@ -12,6 +12,8 @@ function App() {
 
   const[darkMode, setDarkMode] = useState(false);
   const[gridView, setGridView] = useState(true);  
+  const[showNav, setShowNav] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const {accessToken, loading} = useSelector(state => state.auth);
   const history = useHistory();
@@ -33,8 +35,16 @@ function App() {
                setDarkMode={setDarkMode}
                gridView={gridView}  
                setGridView={setGridView}
+               showNav={showNav}
+               showForm={showForm}
+               setShowForm={setShowForm}
                />
-             <MainBody darkMode={darkMode} gridView={gridView}/> 
+             <MainBody 
+               darkMode={darkMode} 
+               gridView={gridView} 
+               setShowNav={setShowNav}
+               setShowForm={setShowForm}
+               /> 
           </div>
         </Route>
         <Route exact path="/auth">
